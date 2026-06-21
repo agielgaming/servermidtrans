@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bromo Story — Sunrise, Savana, dan Cerita Tengger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1410;
+    --ash:#4A4039;
+    --sunrise:#E8743B;
+    --amber:#F2A94B;
+    --dawn:#6F8CA0;
+    --dawn-deep:#3E5366;
+    --sand:#F6EEE1;
+    --mist:#EFE3D2;
+    --paper:#FBF6EC;
+    --line: rgba(27,20,16,0.12);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    font-size:12px;
+    font-weight:700;
+    color:var(--sunrise);
+  }
+
+  /* ===== NAV ===== */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,246,236,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;max-width:1180px;margin:0 auto;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Fraunces',serif;font-weight:700;font-size:20px;
+  }
+  .logo .mark{width:30px;height:30px;}
+  .nav-links{display:flex;gap:30px;list-style:none;margin:0;padding:0;align-items:center;}
+  .nav-links a{
+    text-decoration:none;font-weight:600;font-size:14.5px;color:var(--ash);
+    transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--sunrise);}
+  .nav-cta{
+    background:var(--ink);color:var(--paper)!important;
+    padding:10px 20px;border-radius:30px;font-size:14px!important;
+  }
+  .burger{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .burger span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;overflow:hidden;
+    min-height:92vh;
+    display:flex;align-items:flex-end;
+    background: linear-gradient(180deg, #2C4256 0%, #5A7184 28%, #C98A56 58%, #F2A94B 78%, #F6EEE1 100%);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background: radial-gradient(circle at 50% 64%, rgba(255,221,170,0.95) 0%, rgba(242,169,75,0.55) 16%, rgba(242,169,75,0) 34%);
+    animation: glow 9s ease-in-out infinite;
+  }
+  @keyframes glow{
+    0%,100%{opacity:0.75;}
+    50%{opacity:1;}
+  }
+  .hero-mountains{position:absolute;left:0;right:0;bottom:0;width:100%;}
+  .hero-inner{
+    position:relative;z-index:2;width:100%;
+    padding:160px 28px 64px;
+    max-width:1180px;margin:0 auto;
+    color:#FBF6EC;
+  }
+  .elev-badge{
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid rgba(251,246,236,0.5);
+    border-radius:30px;padding:7px 16px 7px 8px;
+    font-size:12.5px;margin-bottom:26px;background:rgba(27,20,16,0.18);
+  }
+  .elev-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);}
+  .hero h1{
+    font-size:clamp(44px, 8vw, 92px);
+    line-height:0.96;
+    color:#FBF6EC;
+    text-shadow:0 2px 30px rgba(0,0,0,0.18);
+  }
+  .hero h1 em{font-style:italic;color:var(--amber);}
+  .hero p.lead{
+    max-width:520px;margin-top:22px;font-size:17px;line-height:1.6;
+    color:rgba(251,246,236,0.92);
+  }
+  .hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 26px;border-radius:30px;
+    font-weight:700;font-size:14.5px;text-decoration:none;
+    border:1px solid transparent;cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--ink);color:var(--paper);box-shadow:0 8px 20px rgba(0,0,0,0.25);}
+  .btn-ghost{background:rgba(251,246,236,0.12);color:#FBF6EC;border-color:rgba(251,246,236,0.55);}
+  .btn-solid{background:var(--sunrise);color:#fff;}
+  .btn-solid:hover{box-shadow:0 8px 20px rgba(232,116,59,0.35);}
+  .btn-outline{background:transparent;color:var(--ink);border-color:var(--ink);}
+
+  .stat-strip{
+    position:relative;z-index:2;
+    display:flex;flex-wrap:wrap;gap:0;
+    border-top:1px solid rgba(251,246,236,0.3);
+    max-width:1180px;margin:0 auto;
+    padding:0 28px;
+  }
+  .stat-strip .stat{
+    flex:1 1 160px;padding:18px 22px 26px 0;color:#FBF6EC;
+  }
+  .stat-strip .stat .num{font-size:26px;font-weight:600;}
+  .stat-strip .stat .label{font-size:12px;opacity:0.78;margin-top:4px;}
+
+  /* ===== SECTION GENERIC ===== */
+  section{padding:96px 0;}
+  .section-head{max-width:620px;margin-bottom:52px;}
+  .section-head h2{font-size:clamp(30px,4vw,44px);margin-top:10px;line-height:1.08;}
+  .section-head p{color:var(--ash);font-size:15.5px;line-height:1.65;margin-top:14px;}
+
+  /* ===== ABOUT ===== */
+  .about{background:var(--sand);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+  .marker-line{
+    display:flex;align-items:center;gap:14px;margin-bottom:30px;
+  }
+  .marker-line .track{flex:1;height:1px;background:var(--line);position:relative;}
+  .marker-line .track::after{
+    content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
+    width:38%;height:3px;background:var(--sunrise);
+  }
+  .marker-line span{font-size:12px;font-weight:700;color:var(--dawn-deep);}
+  .spot-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .spot-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;
+  }
+  .spot-card .ico{
+    width:38px;height:38px;border-radius:10px;background:var(--mist);
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+    color:var(--sunrise);font-size:18px;
+  }
+  .spot-card h3{font-size:16.5px;font-weight:600;font-family:'Plus Jakarta Sans';}
+  .spot-card p{font-size:13.5px;color:var(--ash);line-height:1.55;margin-top:8px;}
+
+  .info-panel{
+    background:var(--ink);color:var(--sand);border-radius:18px;padding:34px;
+  }
+  .info-panel h3{color:var(--amber);font-size:20px;margin-bottom:18px;}
+  .info-row{
+    display:flex;justify-content:space-between;gap:20px;
+    padding:14px 0;border-bottom:1px solid rgba(251,246,236,0.12);font-size:14px;
+  }
+  .info-row:last-child{border-bottom:none;}
+  .info-row .k{color:rgba(251,246,236,0.6);}
+  .info-row .v{font-weight:600;text-align:right;}
+
+  /* ===== PACKAGES ===== */
+  .pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .pkg-card{
+    border:1px solid var(--line);border-radius:18px;padding:0;
+    background:var(--paper);overflow:hidden;display:flex;flex-direction:column;
+    transition:box-shadow .2s, transform .2s;
+  }
+  .pkg-card:hover{box-shadow:0 16px 36px rgba(27,20,16,0.1);transform:translateY(-4px);}
+  .pkg-top{
+    padding:24px 22px 18px;
+    background:linear-gradient(160deg, var(--dawn-deep), var(--dawn));
+    color:#fff;
+  }
+  .pkg-card.featured .pkg-top{background:linear-gradient(160deg,#C9602E,var(--amber));}
+  .pkg-top .dur{font-size:11.5px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.85;}
+  .pkg-top h3{font-family:'Fraunces',serif;font-size:21px;margin-top:8px;line-height:1.2;}
+  .pkg-body{padding:20px 22px 24px;flex:1;display:flex;flex-direction:column;}
+  .price{font-family:'JetBrains Mono';font-size:22px;font-weight:600;}
+  .price .unit{font-size:11.5px;color:var(--ash);font-weight:400;font-family:'Plus Jakarta Sans';}
+  .pkg-list{list-style:none;margin:16px 0 22px;padding:0;font-size:13px;color:var(--ash);}
+  .pkg-list li{padding:5px 0 5px 18px;position:relative;line-height:1.4;}
+  .pkg-list li::before{
+    content:"✓";position:absolute;left:0;color:var(--sunrise);font-weight:700;
+  }
+  .pkg-pick{
+    margin-top:auto;width:100%;text-align:center;background:var(--ink);color:#fff;
+    border:none;padding:12px;border-radius:10px;font-weight:700;font-size:13.5px;cursor:pointer;
+  }
+  .pkg-pick:hover{background:var(--sunrise);}
+  .badge-pop{
+    position:absolute;margin-top:-44px;margin-left:18px;background:var(--ink);color:#fff;
+    font-size:10.5px;padding:5px 10px;border-radius:20px;font-weight:700;letter-spacing:0.04em;
+  }
+
+  /* ===== BOOKING / PAYMENT ===== */
+  .booking{background:var(--ink);color:var(--sand);}
+  .booking .section-head p{color:rgba(251,246,236,0.65);}
+  .booking .eyebrow{color:var(--amber);}
+  .flow{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+  .steps{display:flex;gap:10px;margin-bottom:30px;}
+  .step-pill{
+    flex:1;padding:10px 14px;border-radius:10px;background:rgba(251,246,236,0.06);
+    font-size:12px;font-weight:600;display:flex;align-items:center;gap:8px;
+    border:1px solid rgba(251,246,236,0.1);
+  }
+  .step-pill.active{background:rgba(232,116,59,0.18);border-color:var(--sunrise);}
+  .step-pill .n{
+    width:20px;height:20px;border-radius:50%;background:rgba(251,246,236,0.15);
+    display:flex;align-items:center;justify-content:center;font-size:11px;
+  }
+  .step-pill.active .n{background:var(--sunrise);}
+
+  .panel{
+    background:rgba(251,246,236,0.04);border:1px solid rgba(251,246,236,0.12);
+    border-radius:18px;padding:30px;
+  }
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:12.5px;margin-bottom:7px;color:rgba(251,246,236,0.7);font-weight:600;}
+  .field input, .field select, .field textarea{
+    width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(251,246,236,0.18);
+    background:rgba(251,246,236,0.05);color:#FBF6EC;font-family:inherit;font-size:14px;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:2px solid var(--sunrise);outline-offset:1px;
+  }
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .field textarea{resize:vertical;min-height:70px;}
+
+  .summary-card{
+    background:rgba(251,246,236,0.04);border:1px solid rgba(251,246,236,0.12);
+    border-radius:18px;padding:28px;position:sticky;top:90px;
+  }
+  .summary-card h3{font-size:17px;margin-bottom:18px;}
+  .sum-row{display:flex;justify-content:space-between;font-size:13.5px;padding:9px 0;border-bottom:1px dashed rgba(251,246,236,0.15);}
+  .sum-row.total{border-bottom:none;border-top:1px solid rgba(251,246,236,0.2);margin-top:8px;padding-top:14px;font-size:16px;font-weight:700;}
+  .sum-row .v{font-family:'JetBrains Mono';}
+
+  .pay-methods{display:grid;gap:10px;margin:20px 0 22px;}
+  .pay-method{
+    display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;
+    border:1px solid rgba(251,246,236,0.15);cursor:pointer;font-size:13.5px;
+  }
+  .pay-method input{accent-color:var(--sunrise);}
+  .pay-method.selected{border-color:var(--sunrise);background:rgba(232,116,59,0.1);}
+
+  .confirm-box{
+    display:none;text-align:center;padding:36px 24px;
+  }
+  .confirm-box.show{display:block;}
+  .confirm-icon{
+    width:64px;height:64px;border-radius:50%;background:var(--sunrise);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:28px;
+  }
+  .confirm-code{
+    font-family:'JetBrains Mono';font-size:22px;letter-spacing:0.08em;
+    background:rgba(251,246,236,0.08);display:inline-block;padding:10px 22px;border-radius:10px;
+    margin:14px 0 22px;border:1px dashed rgba(251,246,236,0.3);
+  }
+
+  /* ===== TESTIMONI ===== */
+  .testimoni{background:var(--sand);}
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .test-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;
+  }
+  .test-card .stars{color:var(--amber);font-size:14px;margin-bottom:14px;letter-spacing:2px;}
+  .test-card p{font-size:14px;line-height:1.6;color:var(--ash);}
+  .test-who{display:flex;align-items:center;gap:10px;margin-top:18px;}
+  .test-who .av{
+    width:36px;height:36px;border-radius:50%;background:var(--dawn);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;
+  }
+  .test-who .name{font-size:13.5px;font-weight:700;}
+  .test-who .loc{font-size:11.5px;color:var(--ash);}
+
+  /* ===== FOOTER ===== */
+  footer{background:#15100D;color:rgba(251,246,236,0.7);padding:64px 0 28px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px;margin-bottom:48px;}
+  .foot-grid h4{color:#FBF6EC;font-size:13px;margin-bottom:16px;text-transform:uppercase;letter-spacing:0.08em;}
+  .foot-grid ul{list-style:none;margin:0;padding:0;}
+  .foot-grid li{margin-bottom:10px;font-size:13.5px;}
+  .foot-grid a{text-decoration:none;}
+  .foot-grid a:hover{color:var(--amber);}
+  .foot-logo{font-family:'Fraunces',serif;font-size:22px;color:#FBF6EC;margin-bottom:14px;}
+  .foot-bottom{
+    border-top:1px solid rgba(251,246,236,0.1);padding-top:24px;
+    display:flex;justify-content:space-between;font-size:12.5px;flex-wrap:wrap;gap:10px;
+  }
+
+  .wa-float{
+    position:fixed;bottom:24px;right:24px;z-index:60;
+    background:var(--sunrise);color:#fff;width:56px;height:56px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(232,116,59,0.4);
+    text-decoration:none;font-size:24px;
+  }
+
+  @media(max-width:980px){
+    .pkg-grid{grid-template-columns:1fr 1fr;}
+    .about-grid{grid-template-columns:1fr;}
+    .flow{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .test-grid{grid-template-columns:1fr;}
+    .summary-card{position:static;}
+  }
+  @media(max-width:680px){
+    .nav-links{
+      position:fixed;top:64px;left:0;right:0;background:var(--paper);
+      flex-direction:column;align-items:flex-start;padding:20px 28px;
+      border-bottom:1px solid var(--line);gap:18px;
+      transform:translateY(-130%);transition:transform .25s ease;
+    }
+    .nav-links.open{transform:translateY(0);}
+    .burger{display:block;}
+    .pkg-grid{grid-template-columns:1fr;}
+    .field-row{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .stat-strip .stat{flex:1 1 45%;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important;transition:none!important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav>
+    <div class="logo">
+      <svg class="mark" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="15" fill="#E8743B"/>
+        <path d="M4 22L12 10L17 16L21 9L28 22Z" fill="#1B1410"/>
+      </svg>
+      Bromo Story
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#tentang">Tentang Bromo</a></li>
+      <li><a href="#paket">Paket Trip</a></li>
+      <li><a href="#booking">Booking</a></li>
+      <li><a href="#testimoni">Testimoni</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+      <li><a href="#booking" class="nav-cta">Booking Sekarang</a></li>
+    </ul>
+    <button class="burger" id="burgerBtn" aria-label="Buka menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<section class="hero">
+  <svg class="hero-mountains" viewBox="0 0 1180 260" preserveAspectRatio="none" style="height:260px;">
+    <polygon points="0,260 0,150 220,40 380,150 520,70 700,160 880,60 1060,140 1180,90 1180,260" fill="#2C2017" opacity="0.55"/>
+    <polygon points="0,260 0,190 180,110 340,200 500,120 680,210 860,130 1040,200 1180,150 1180,260" fill="#1B1410" opacity="0.85"/>
+  </svg>
+  <div class="hero-inner">
+    <div class="elev-badge"><span class="dot"></span> Taman Nasional Bromo Tengger Semeru · Jawa Timur</div>
+    <h1>Saksikan <em>matahari terbit</em><br>dari atap Tengger.</h1>
+    <p class="lead">Bromo Story menemani perjalananmu ke salah satu sunrise terbaik di dunia — dari pemesanan jeep, sunrise point, hingga jelajah lautan pasir. Satu pesan, semua siap.</p>
+    <div class="hero-cta">
+      <a href="#paket" class="btn btn-primary">Lihat Paket Trip ↓</a>
+      <a href="#booking" class="btn btn-ghost">Booking Langsung</a>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div class="stat"><div class="num mono">2.329</div><div class="label">Mdpl ketinggian kawah Bromo</div></div>
+    <div class="stat"><div class="num mono">04:00</div><div class="label">Estimasi tiba di Penanjakan</div></div>
+    <div class="stat"><div class="num mono">Apr–Okt</div><div class="label">Musim kemarau, waktu terbaik</div></div>
+    <div class="stat"><div class="num mono">4.9/5</div><div class="label">Rating dari 1.200+ tamu</div></div>
+  </div>
+</section>
+
+<section class="about" id="tentang">
+  <div class="wrap">
+    <div class="marker-line"><span>2.329 MDPL</span><div class="track"></div><span>TENGGER SEMERU</span></div>
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow">Tentang Gunung Bromo</div>
+        <h2>Gunung berapi aktif yang tetap dikunjungi jutaan orang setiap tahun.</h2>
+        <p style="color:var(--ash);font-size:15px;line-height:1.7;margin-top:18px;">
+          Gunung Bromo terletak di kawasan Taman Nasional Bromo Tengger Semeru, perbatasan Kabupaten Probolinggo, Pasuruan, Lumajang, dan Malang. Kawahnya yang masih aktif dikelilingi lautan pasir seluas sekitar 10 km², menjadikannya salah satu lanskap vulkanik paling ikonik di Indonesia.
+        </p>
+        <div class="spot-cards" style="margin-top:28px;">
+          <div class="spot-card">
+            <div class="ico">⛰</div>
+            <h3>Penanjakan 1</h3>
+            <p>Titik favorit menyaksikan sunrise dengan Gunung Semeru sebagai latar.</p>
+          </div>
+          <div class="spot-card">
+            <div class="ico">🌋</div>
+            <h3>Kawah Bromo</h3>
+            <p>Naik ±250 anak tangga untuk melihat langsung kawah yang masih mengepul.</p>
+          </div>
+          <div class="spot-card">
+            <div class="ico">🏜</div>
+            <h3>Pasir Berbisik</h3>
+            <p>Hamparan pasir vulkanik luas, lokasi favorit foto dan video sinematik.</p>
+          </div>
+          <div class="spot-card">
+            <div class="ico">🌾</div>
+            <h3>Bukit Teletubbies</h3>
+            <p>Bukit hijau berbentuk kubah yang kontras dengan lautan pasir di sekitarnya.</p>
+          </div>
+        </div>
+      </div>
+      <div class="info-panel">
+        <h3>Info Cepat Perjalanan</h3>
+        <div class="info-row"><span class="k">Lokasi</span><span class="v">Probolinggo / Pasuruan, Jawa Timur</span></div>
+        <div class="info-row"><span class="k">Titik kumpul</span><span class="v">Cemoro Lawang</span></div>
+        <div class="info-row"><span class="k">Transportasi area</span><span class="v">Jeep 4x4 (maks. 6 orang)</span></div>
+        <div class="info-row"><span class="k">Suhu malam hari</span><span class="v">3°C – 10°C</span></div>
+        <div class="info-row"><span class="k">Waktu terbaik</span><span class="v">April – Oktober</span></div>
+        <div class="info-row"><span class="k">Disarankan bawa</span><span class="v">Jaket tebal, masker, senter</span></div>
+        <div class="info-row"><span class="k">Mulai perjalanan</span><span class="v">Tengah malam (01.00–02.00 WIB)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="paket">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Paket Trip</div>
+      <h2>Pilih ritme perjalananmu ke Bromo.</h2>
+      <p>Semua paket sudah termasuk jeep dan pemandu lokal. Tinggal pilih, lalu lanjutkan ke form booking di bawah — harga otomatis terhitung.</p>
+    </div>
+    <div class="pkg-grid" id="pkgGrid"></div>
+  </div>
+</section>
+
+<section class="booking" id="booking">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Booking & Pembayaran</div>
+      <h2>Amankan jeep dan jadwalmu.</h2>
+      <p>Isi data perjalanan, lalu lanjut ke pembayaran. Konfirmasi dan kode booking akan tampil langsung di halaman ini.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step-pill active" id="stepPill1"><span class="n">1</span> Detail Perjalanan</div>
+      <div class="step-pill" id="stepPill2"><span class="n">2</span> Pembayaran</div>
+      <div class="step-pill" id="stepPill3"><span class="n">3</span> Konfirmasi</div>
+    </div>
+
+    <div class="flow">
+      <div>
+        <!-- STEP 1 -->
+        <form class="panel" id="bookingForm">
+          <div class="field-row">
+            <div class="field">
+              <label for="nama">Nama lengkap</label>
+              <input type="text" id="nama" required placeholder="Nama sesuai KTP">
+            </div>
+            <div class="field">
+              <label for="telp">No. WhatsApp</label>
+              <input type="tel" id="telp" required placeholder="08xx-xxxx-xxxx">
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" required placeholder="nama@email.com">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="paket">Pilih paket</label>
+              <select id="paket" required></select>
+            </div>
+            <div class="field">
+              <label for="jumlah">Jumlah orang</label>
+              <input type="number" id="jumlah" min="1" value="2" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="tanggal">Tanggal keberangkatan</label>
+            <input type="date" id="tanggal" required>
+          </div>
+          <div class="field">
+            <label for="catatan">Catatan tambahan (opsional)</label>
+            <textarea id="catatan" placeholder="Titik jemput, permintaan khusus, dll."></textarea>
+          </div>
+          <button type="submit" class="btn btn-solid" style="width:100%;justify-content:center;">Lanjut ke Pembayaran →</button>
+        </form>
+
+        <!-- STEP 2 -->
+        <div class="panel" id="paymentPanel" style="display:none;">
+          <h3 style="font-size:17px;margin-bottom:6px;">Pembayaran</h3>
+          <p style="font-size:13px;color:rgba(251,246,236,0.6);margin-bottom:18px;">Klik tombol di bawah untuk membuka jendela pembayaran resmi (transfer bank, QRIS, e-wallet, atau kartu kredit tersedia di sana).</p>
+          <div style="display:flex;gap:12px;">
+            <button class="btn btn-ghost" id="backToStep1" type="button">← Kembali</button>
+            <button class="btn btn-solid" id="confirmPay" type="button" style="flex:1;justify-content:center;">Konfirmasi Pembayaran</button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="panel confirm-box" id="confirmPanel">
+          <div class="confirm-icon">✓</div>
+          <h3 style="font-size:20px;">Booking berhasil dikonfirmasi!</h3>
+          <p style="font-size:13.5px;color:rgba(251,246,236,0.7);margin-top:8px;">Simpan kode booking ini dan tunjukkan saat penjemputan di Cemoro Lawang.</p>
+          <div class="confirm-code" id="bookingCode">BRS-000000</div>
+          <p style="font-size:13px;color:rgba(251,246,236,0.65);max-width:380px;margin:0 auto;">Tim kami akan menghubungi nomor WhatsApp yang kamu daftarkan dalam 1x24 jam untuk konfirmasi titik jemput.</p>
+          <button class="btn btn-ghost" id="newBooking" style="margin-top:22px;">Buat Booking Baru</button>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <h3>Ringkasan Pesanan</h3>
+        <div class="sum-row"><span>Paket</span><span class="v" id="sumPaket">—</span></div>
+        <div class="sum-row"><span>Tanggal</span><span class="v" id="sumTanggal">—</span></div>
+        <div class="sum-row"><span>Jumlah orang</span><span class="v" id="sumJumlah">—</span></div>
+        <div class="sum-row"><span>Harga satuan</span><span class="v" id="sumHarga">—</span></div>
+        <div class="sum-row total"><span>Total</span><span class="v" id="sumTotal">Rp 0</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimoni" id="testimoni">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Cerita Tamu</div>
+      <h2>Yang mereka bawa pulang dari Bromo.</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>Jeepnya tepat waktu jam 1 malam, drivernya paham banget titik sunrise terbaik. Worth it!</p>
+        <div class="test-who"><div class="av">RA</div><div><div class="name">Rani A.</div><div class="loc">Jakarta</div></div></div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>Paket Bromo Ijen 2D1N-nya rapi, penginapan nyaman, dan guide-nya ramah sepanjang perjalanan.</p>
+        <div class="test-who"><div class="av">DP</div><div><div class="name">Dimas P.</div><div class="loc">Surabaya</div></div></div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>Booking online gampang, harga jelas dari awal, tidak ada biaya tambahan dadakan.</p>
+        <div class="test-who"><div class="av">SN</div><div><div class="name">Sinta N.</div><div class="loc">Malang</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="kontak">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">Bromo Story</div>
+        <p style="font-size:13.5px;line-height:1.6;max-width:280px;">Operator trip lokal Bromo Tengger Semeru. Membantu perjalananmu dari pemesanan jeep hingga sunrise terbaik di Penanjakan.</p>
+      </div>
+      <div>
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="#tentang">Tentang Bromo</a></li>
+          <li><a href="#paket">Paket Trip</a></li>
+          <li><a href="#booking">Booking</a></li>
+          <li><a href="#testimoni">Testimoni</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontak</h4>
+        <ul>
+          <li>WhatsApp: +62 812-3456-7890</li>
+          <li>Email: halo@bromostory.com</li>
+          <li>Titik kumpul: Cemoro Lawang</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ikuti Kami</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Bromo Story. Semua hak dilindungi.</span>
+      <span>Dibuat dengan ♥ untuk pecinta sunrise.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/6281234567890" target="_blank" rel="noopener" aria-label="Chat WhatsApp">💬</a>
+
+<!-- Midtrans Snap.js — ganti data-client-key dengan Client Key kamu (dari dashboard.midtrans.com).
+     Pakai app.sandbox.midtrans.com untuk testing, app.midtrans.com untuk production. -->
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-GANTI-DENGAN-CLIENT-KEY-KAMU"></script>
+
+<script>
+  // ============================================================
+  // GANTI dengan URL backend kamu setelah deploy (lihat README.md)
+  // contoh: "https://bromostory-backend-production.up.railway.app"
+  const BACKEND_URL = "https://GANTI-DENGAN-URL-BACKEND-KAMU";
+  // ============================================================
+
+  // ---- Data paket ----
+  const packages = [
+    {
+      id: "sunrise-half",
+      name: "Bromo Sunrise Half Day",
+      duration: "8 jam · mulai 01.30",
+      price: 350000,
+      unit: "/ orang",
+      featured: false,
+      items: ["Jeep 4x4 (maks 6 org)", "Penanjakan 1", "Kawah Bromo", "Pasir Berbisik"]
+    },
+    {
+      id: "sunrise-teletubbies",
+      name: "Sunrise + Bukit Teletubbies",
+      duration: "10 jam · mulai 01.00",
+      price: 450000,
+      unit: "/ orang",
+      featured: true,
+      items: ["Jeep 4x4 (maks 6 org)", "Penanjakan 1 & Kawah Bromo", "Bukit Teletubbies", "Savana hijau"]
+    },
+    {
+      id: "madakaripura",
+      name: "Bromo + Madakaripura",
+      duration: "12 jam · mulai 00.30",
+      price: 600000,
+      unit: "/ orang",
+      featured: false,
+      items: ["Semua spot Bromo utama", "Air Terjun Madakaripura", "Makan siang lokal", "Guide berpengalaman"]
+    },
+    {
+      id: "bromo-ijen",
+      name: "Bromo + Ijen 2D1N",
+      duration: "2 hari 1 malam",
+      price: 1450000,
+      unit: "/ orang",
+      featured: false,
+      items: ["Semua spot Bromo", "Blue fire Kawah Ijen", "Penginapan 1 malam", "Transport antar lokasi"]
+    }
+  ];
+
+  const pkgGrid = document.getElementById('pkgGrid');
+  const paketSelect = document.getElementById('paket');
+
+  packages.forEach(p => {
+    pkgGrid.innerHTML += `
+      <div class="pkg-card ${p.featured ? 'featured' : ''}">
+        ${p.featured ? '<div class="badge-pop">PALING DIPILIH</div>' : ''}
+        <div class="pkg-top">
+          <div class="dur">${p.duration}</div>
+          <h3>${p.name}</h3>
+        </div>
+        <div class="pkg-body">
+          <div class="price">Rp ${p.price.toLocaleString('id-ID')} <span class="unit">${p.unit}</span></div>
+          <ul class="pkg-list">${p.items.map(i => `<li>${i}</li>`).join('')}</ul>
+          <button class="pkg-pick" data-id="${p.id}">Pilih Paket Ini</button>
+        </div>
+      </div>`;
+    paketSelect.innerHTML += `<option value="${p.id}">${p.name} — Rp ${p.price.toLocaleString('id-ID')} ${p.unit}</option>`;
+  });
+
+  document.querySelectorAll('.pkg-pick').forEach(btn => {
+    btn.addEventListener('click', () => {
+      paketSelect.value = btn.dataset.id;
+      document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+      updateSummary();
+    });
+  });
+
+  // ---- Ringkasan & kalkulasi ----
+  const jumlahInput = document.getElementById('jumlah');
+  const tanggalInput = document.getElementById('tanggal');
+
+  function getSelectedPackage(){
+    return packages.find(p => p.id === paketSelect.value) || packages[0];
+  }
+
+  function updateSummary(){
+    const p = getSelectedPackage();
+    const jumlah = Math.max(1, parseInt(jumlahInput.value || "1", 10));
+    const total = p.price * jumlah;
+    document.getElementById('sumPaket').textContent = p.name;
+    document.getElementById('sumTanggal').textContent = tanggalInput.value || "—";
+    document.getElementById('sumJumlah').textContent = jumlah + " orang";
+    document.getElementById('sumHarga').textContent = "Rp " + p.price.toLocaleString('id-ID') + " " + p.unit;
+    document.getElementById('sumTotal').textContent = "Rp " + total.toLocaleString('id-ID');
+    return {p, jumlah, total};
+  }
+
+  [paketSelect, jumlahInput, tanggalInput].forEach(el => el.addEventListener('input', updateSummary));
+  updateSummary();
+
+  // ---- Step flow ----
+  const bookingForm = document.getElementById('bookingForm');
+  const paymentPanel = document.getElementById('paymentPanel');
+  const confirmPanel = document.getElementById('confirmPanel');
+  const stepPill1 = document.getElementById('stepPill1');
+  const stepPill2 = document.getElementById('stepPill2');
+  const stepPill3 = document.getElementById('stepPill3');
+
+  bookingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    updateSummary();
+    bookingForm.style.display = 'none';
+    paymentPanel.style.display = 'block';
+    stepPill1.classList.remove('active');
+    stepPill2.classList.add('active');
+  });
+
+  document.getElementById('backToStep1').addEventListener('click', () => {
+    paymentPanel.style.display = 'none';
+    bookingForm.style.display = 'block';
+    stepPill2.classList.remove('active');
+    stepPill1.classList.add('active');
+  });
+
+  const confirmPayBtn = document.getElementById('confirmPay');
+
+  confirmPayBtn.addEventListener('click', async () => {
+    const { p, jumlah, total } = updateSummary();
+
+    const payload = {
+      nama: document.getElementById('nama').value,
+      email: document.getElementById('email').value,
+      telp: document.getElementById('telp').value,
+      paketId: p.id,
+      paketNama: p.name,
+      jumlah: jumlah,
+      hargaSatuan: p.price,
+      tanggal: tanggalInput.value,
+      catatan: document.getElementById('catatan').value,
+    };
+
+    confirmPayBtn.disabled = true;
+    confirmPayBtn.textContent = "Memproses...";
+
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/create-transaction`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Gagal membuat transaksi.');
+      }
+
+      const data = await res.json();
+
+      // Buka popup pembayaran Midtrans Snap
+      window.snap.pay(data.token, {
+        onSuccess: () => showConfirmation(data.orderId),
+        onPending: () => showConfirmation(data.orderId),
+        onError: () => {
+          alert('Pembayaran gagal diproses. Silakan coba lagi.');
+        },
+        onClose: () => {
+          // user menutup popup tanpa menyelesaikan pembayaran
+        },
+      });
+    } catch (err) {
+      console.error(err);
+      alert(err.message || 'Terjadi kesalahan, coba lagi sebentar lagi.');
+    } finally {
+      confirmPayBtn.disabled = false;
+      confirmPayBtn.textContent = "Konfirmasi Pembayaran";
+    }
+  });
+
+  function showConfirmation(orderId) {
+    document.getElementById('bookingCode').textContent = orderId;
+    paymentPanel.style.display = 'none';
+    confirmPanel.classList.add('show');
+    stepPill2.classList.remove('active');
+    stepPill3.classList.add('active');
+  }
+
+  document.getElementById('newBooking').addEventListener('click', () => {
+    confirmPanel.classList.remove('show');
+    bookingForm.reset();
+    bookingForm.style.display = 'block';
+    stepPill3.classList.remove('active');
+    stepPill1.classList.add('active');
+    updateSummary();
+  });
+
+  // ---- Mobile nav ----
+  const burgerBtn = document.getElementById('burgerBtn');
+  const navLinks = document.getElementById('navLinks');
+  burgerBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+</script>
+
+</body>
+</html>
